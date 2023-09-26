@@ -1,0 +1,21 @@
+{
+  "name": "search-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "search-service.js",
+  "scripts": {
+    "dev": "nodemon search-service.js",
+    "prod": "pm2 start search-service.js --name search-service.js -i 5"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.9.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "isomorphic-fetch": "^3.0.0",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.0.1"
+  }
+}

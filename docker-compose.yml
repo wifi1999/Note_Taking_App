@@ -1,0 +1,53 @@
+version: '3.9'
+services:
+  frontend:
+    build:
+      context: ./client 
+    ports:
+      - "8080:8080"
+    depends_on:
+      - notes-service
+      - notification-service
+      - search-service
+
+  notes-service:
+    build:
+      context: ./notes-service 
+    ports:
+      - "3001:3001"
+    environment:
+      MONGO_URI: mongodb://notes-db:27017/notes-app  
+    networks:
+      - app-network
+
+  notification-service:
+    build:
+      context: ./notification-service  
+    ports:
+      - "3002:3002"
+    networks:
+      - app-network
+
+  search-service:
+    build:
+      context: ./search-service
+    ports:
+      - "3003:3003"
+    networks:
+      - app-network
+
+  notes-db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - notes-db-data:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  notes-db-data:
